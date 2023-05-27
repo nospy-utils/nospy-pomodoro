@@ -1,0 +1,40 @@
+<html>
+	<head>
+		<title>No-Spy Pomodoro</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<div class="container">
+			<div class="header">
+				<h1>No-Spy Pomodoro Countdown</h1>
+			</div>
+			<div class="content">
+				<h2>Countdown</h2>
+				<span id="countdown">00:00</span>
+				&nbsp;Current Phase:
+				<span id="currentPhase"></span>
+			</div>
+			<div>
+				<div class="focus">
+					<h2>Focus</h2>
+					<span>Minutes</span>
+					<input type="number" id="focusMinutes" value="20" min="0" max="60" />
+					<span>Seconds</span>
+					<input type="number" id="focusSeconds" value="0" min="0" max="60" />
+				</div>
+				<div class="rest">
+					<h2>Rest</h2>
+					<span>Minutes</span>
+					<input type="number" id="restMinutes" value="2" min="0" max="60" />
+					<span>Seconds</span>
+					<input type="number" id="restSeconds" value="0" min="0" max="60" />
+				</div>
+				<div class="controls">
+					<button id="start">Start</button>
+					<button id="stop" disabled>Stop</button>
+				</div>
+			</div>
+		</div>
+		<script src="script.js"></script>
+	</body>
+</html>

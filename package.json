@@ -1,0 +1,27 @@
+{
+  "name": "nospy-pomodoro",
+  "version": "1.0.0",
+  "description": "A bare-minimum pomodoro countdown that doesn't spy on you",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx http-server -p 6666"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PauloMigAlmeida/nospy-pomodoro.git"
+  },
+  "keywords": [
+    "pomodoro",
+    "countdown",
+    "nospy"
+  ],
+  "author": "Paulo Almeida",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/PauloMigAlmeida/nospy-pomodoro/issues"
+  },
+  "homepage": "https://github.com/PauloMigAlmeida/nospy-pomodoro#readme",
+  "dependencies": {
+    "http-server": "^14.1.1"
+  }
+}
