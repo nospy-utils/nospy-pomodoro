@@ -4,7 +4,7 @@
   "description": "A bare-minimum pomodoro countdown that doesn't spy on you",
   "main": "index.js",
   "scripts": {
-    "start": "npx http-server -p 6666"
+    "start": "npx http-server"
   },
   "repository": {
     "type": "git",

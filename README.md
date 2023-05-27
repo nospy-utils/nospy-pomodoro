@@ -21,8 +21,6 @@ npm install
 npm run start
 ```
 
-You should be able to access it at http://localhost:6666
-
 PS.: Don't forget to allow browser notifications when first running it ;-)
 
 enjoy :-)
