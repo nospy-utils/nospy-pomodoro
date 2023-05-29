@@ -3,13 +3,15 @@ var focusTimeLeft = 0;
 var restTimeTarget = 0;
 var restTimeLeft = 0;
 var focusToggle = false;
-var paused = false;
+var doVisualUpdates = true;
+var worker = undefined;
 
-function displayTime(time) {
+function displayTime() {
+	var time = focusToggle ? focusTimeLeft : restTimeLeft;
 	var minutes = Math.floor(time / 60);
 	var seconds = time % 60;
-	var display = minutes.toString().padStart(2,'0') + ":" 
-		+ seconds.toString().padStart(2,'0');
+	var display = minutes.toString().padStart(2, '0') + ":"
+		+ seconds.toString().padStart(2, '0');
 	document.getElementById("countdown").textContent = display;
 }
 
@@ -17,38 +19,46 @@ function displayCurrentPhase() {
 	if (focusToggle) {
 		document.getElementById("currentPhase").textContent = "Focus";
 	} else {
-		document.getElementById("currentPhase").textContent = "Rest";	
+		document.getElementById("currentPhase").textContent = "Rest";
 	}
 }
 
-function countdown(callbackFocus, callbackRest) {
-	var interval = setInterval(function() {
-		var minutes;
-		var seconds;
+function updateUI() {
+	// inactive tabs get throttled by the browser so 
+	// we don't want to update UI not visible which 
+	// saves baterry significantly
+	if (!doVisualUpdates) {
+		return;
+	}
 
-		if (paused) {
-			clearInterval(interval);
-		}
+	displayTime();
+	displayCurrentPhase();
+}
 
-		if (focusToggle) {
-			focusTimeLeft--;
-			displayTime(focusTimeLeft);
-			if (focusTimeLeft <= 0) {
-				callbackFocus();
-				focusTimeLeft = focusTimeTarget;
-				focusToggle = false;
-			}
-		} else {
-			restTimeLeft--;
-			displayTime(restTimeLeft);
-			if (restTimeLeft <= 0) {
-				callbackRest();
-				restTimeLeft = restTimeTarget;
-				focusToggle = true;
-			}
+function updateCounters() {
+	if (focusToggle) {
+		focusTimeLeft--;
+		if (focusTimeLeft <= 0) {
+			notify();
+			focusTimeLeft = focusTimeTarget;
+			focusToggle = false;
 		}
-		displayCurrentPhase();
-	}, 1000);
+	} else {
+		restTimeLeft--;
+		if (restTimeLeft <= 0) {
+			notify();
+			restTimeLeft = restTimeTarget;
+			focusToggle = true;
+		}
+	}
+}
+
+function countdown() {
+	worker = new Worker('worker.js')
+	worker.onmessage = function (e) {
+		updateUI();
+		updateCounters();
+	};	
 }
 
 function start() {
@@ -69,18 +79,12 @@ function start() {
 	restTimeTarget = restMinutes * 60 + restSeconds;
 	restTimeLeft = restTimeTarget;
 
-	paused = false;
 	focusToggle = true;
-	
-	countdown(() => {
-		notify("Focus Time's Up! - Take a break");
-	}, () => {
-		notify("Break Time's Up! - Get back to work");
-	});
+	countdown();
 }
 
 function stop() {
-	paused = true;
+	worker.terminate()
 	toggleControls();
 }
 
@@ -100,7 +104,8 @@ function requestNotificationPermission() {
 }
 
 function notify(message) {
-	if(requestNotificationPermission()) {
+	var message = focusToggle ? "Focus Time's Up! - Take a break" : "Break Time's Up! - Get back to work";
+	if (requestNotificationPermission()) {
 		var notification = new Notification(message);
 	}
 }
@@ -109,7 +114,7 @@ function toggleControls() {
 	var startButton = document.getElementById("start");
 	var stopButton = document.getElementById("stop");
 
-	if(startButton.disabled) {
+	if (startButton.disabled) {
 		startButton.disabled = false;
 		stopButton.disabled = true;
 	} else {
@@ -121,4 +126,4 @@ function toggleControls() {
 
 document.getElementById("start").addEventListener("click", start);
 document.getElementById("stop").addEventListener("click", stop);
-
+document.addEventListener('visibilitychange', () => { doVisualUpdates = !document.hidden; });

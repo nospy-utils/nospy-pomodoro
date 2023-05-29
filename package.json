@@ -21,7 +21,8 @@
     "url": "https://github.com/PauloMigAlmeida/nospy-pomodoro/issues"
   },
   "homepage": "https://github.com/PauloMigAlmeida/nospy-pomodoro#readme",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "http-server": "^14.1.1"
   }
 }
