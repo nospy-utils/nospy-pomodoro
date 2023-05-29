@@ -104,10 +104,22 @@ function requestNotificationPermission() {
 }
 
 function notify(message) {
-	var message = focusToggle ? "Focus Time's Up! - Take a break" : "Break Time's Up! - Get back to work";
+	var message;
+	var audioId;
+	
+	if (focusToggle) {
+		message = "Focus Time's Up! - Take a break";
+		audioId = "restAudio";
+	} else {
+		message = "Break Time's Up! - Get back to work";
+		audioId = "focusAudio";
+	}
+
 	if (requestNotificationPermission()) {
 		var notification = new Notification(message);
 	}
+
+	document.getElementById(audioId).play();
 }
 
 function toggleControls() {
