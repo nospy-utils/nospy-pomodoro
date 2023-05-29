@@ -3,9 +3,10 @@ nospy-pomodoro
 
 No-Spy Pomodoro Countdown is a bare-minimum implementation by design.
 
-* it doesn't code obfuscation - so you know what's in there.
+* it doesn't use code obfuscation - so you know what's in there.
 * it doesn't send your data anywhere - hallelujah
 * it doesn't need to be beautiful - just functional.
+* it doesn't have any ads
 
 You can understand what it does and change you want without
 spending hours trying to figure out what new frontend trend
