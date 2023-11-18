@@ -1,6 +1,8 @@
 nospy-pomodoro
 ==============
 
+**Demo:** https://paulomigalmeida.github.io/nospy-pomodoro/
+
 No-Spy Pomodoro Countdown is a bare-minimum implementation by design.
 
 * it doesn't use code obfuscation - so you know what's in there.
