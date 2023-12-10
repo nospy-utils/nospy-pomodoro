@@ -18,7 +18,7 @@ result - like open source stuff should ideally be.
 **Running it**
 
 ```bash
-git clone https://github.com/PauloMigAlmeida/nospy-pomodoro.git
+git clone https://github.com/nospy-utils/nospy-pomodoro.git
 cd nospy-pomodoro
 npm install
 npm run start
