@@ -1,7 +1,7 @@
 nospy-pomodoro
 ==============
 
-**Demo:** [https://paulomigalmeida.github.io/nospy-pomodoro/](https://nospy-utils.github.io/nospy-pomodoro/)
+**Demo:** [https://nospy-utils.github.io/nospy-pomodoro/](https://nospy-utils.github.io/nospy-pomodoro/)
 
 No-Spy Pomodoro Countdown is a bare-minimum implementation by design.
 
